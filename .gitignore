@@ -1,0 +1,4 @@
+# file
+*.pyc
+tags
+.DS_Store
