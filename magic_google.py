@@ -88,6 +88,7 @@ class MagicGoogle():
         :param start:
         :return: Generator
         """
+        result = list()
         content = self.search_page(query, language, num, start, pause)
         pq_content = self.pq_html(content)
         for item in pq_content('h3.r').items():
@@ -95,7 +96,8 @@ class MagicGoogle():
             if href:
                 url = self.filter_link(href)
                 if url:
-                    yield url
+                    result.append(url)
+        return result
              
 
     def filter_link(self, link):

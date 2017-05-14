@@ -19,21 +19,26 @@ class searchEngine(object):
     def setLogger(self, log):
         self.log = log
     
-    def googleSearch(self, searchString):
+    def googleSearch(self, searchstring):
         
         PROXIES = [{'http': 'http://127.0.0.1:8080','https': 'http://127.0.0.1:8080'}]
-
         mg = MagicGoogle(PROXIES)
 
+        searchresult = list()
         n = 0
         while True:
-            result = mg.search_url(query='inurl:gov.cn', num=50, start=n)
-            print(result)
+            result = mg.search_url(query=searchstring, num=50, start=n)
+            if not result:
+                break
             n += 50
             for url in result:
-                print((n,url))
+                self.log.info(url)
+                if url not in searchresult:
+                    searchresult.append(url)
         
             time.sleep(random.randint(5, 30))
+
+        return searchresult
             
     def binSearch(self):
         pass
@@ -64,4 +69,5 @@ def logger(v=1):
 if __name__ == '__main__':
     
     searchEngine = searchEngine()
+    searchEngine.setLogger(logger())
     searchEngine.googleSearch("gov.cn")

@@ -1,4 +1,5 @@
 # file
 *.pyc
+*.txt
 tags
 .DS_Store
