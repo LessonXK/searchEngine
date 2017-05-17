@@ -7,3 +7,11 @@ DOMAIN = 'www.google.com'
 URL_SEARCH = "https://{domain}/search?hl={language}&q={query}&btnG=Search&gbv=1"
 URL_NUM = "https://{domain}/search?hl={language}&q={query}&btnG=Search&gbv=1&num={num}"
 URL_NEXT = "https://{domain}/search?hl={language}&q={query}&btnG=Search&gbv=1&num={num}&start={start}"
+
+
+search_config = {
+    'USER_AGENT': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36',
+    'BAIDU_DOMAIN'： 'www.baidu.com',
+    'GOOGLE_DOMAIN': 'www.google.com',
+    'BAIDU_SEARCH': 'https://www.baidu.com/s?wd={query}&pn={number}&ie=utf-8&rsv_idx=1'
+}
