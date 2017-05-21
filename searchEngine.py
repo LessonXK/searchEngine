@@ -5,13 +5,13 @@
 
 import re
 import sys
-import requests
 import logging
 import random
 import time
 from magic_google import MagicGoogle
+from config import set_config, get_config
 
-class searchEngine(object):
+class SearchEngine(object):
     
     def __init__(self):
         pass

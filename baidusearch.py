@@ -3,41 +3,37 @@
 
 __author__ = 'xiaokong'
 
-import requests
-import chardet
-import logging
-import time
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+import lxml.html
 
-class BaiduSearch():
+from config import set_config, get_config
+from search import Search
+
+class BaiduSearch(Search):
     """
     BAIDU SEARCH
     """
     def __init__(self):
         pass
 
-    def __search_page(self, query, num, pause=2):
-        """
-        Baidu Search by Page Number
-        """
-        time.sleep(pause)
-        headers = {'user-agent': self.get_random_user_agent()}
-        try:
-            requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-            response = requests.get(url=url,
-                                    headers=headers,
-                                    timeout=30,
-                                    verify=False
-                                    allow_redirects=False)
-            charset = chardet.detect(r.content)
-            content = r.content.decode(charset['encoding'])
-            return content
-        except Exception as e:
-            logging.exception(e)
-            return None
-
     def search(self, query, num):
         """
         Baidu Search
         """
-        content = self.__search_page(query, num)
+        url = get_config('BAIDU_SEARCH').format(query=query, number=num)
+        response = self.query(method='GET', url=url)
+        if response is None:
+            return False
+
+        result = list()
+        html = lxml.html.fromstring(response.content)
+        urls = html.cssselect('h3 a[href]')
+        for url in urls:
+            url = url.get('href')
+            response = self.query(method='HEAD', url=url)
+            if response is None:
+                continue
+            if response.status_code == 302:
+                result.append(response.headers['location'])
+                self.log.info(response.headers['location'])
+
+        return result
