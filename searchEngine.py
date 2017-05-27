@@ -68,6 +68,6 @@ def logger(v=1):
     
 if __name__ == '__main__':
     
-    searchEngine = searchEngine()
+    searchEngine = SearchEngine()
     searchEngine.setLogger(logger())
-    searchEngine.googleSearch("gov.cn")
+    print searchEngine.googleSearch("inurl:.gov.cn")

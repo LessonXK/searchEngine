@@ -21,8 +21,9 @@ class GoogleSearch(Search):
     """
     def __init__(self):
         pass
-
-    def search(self, query, num, start):
+    
+    def 
+    def __search_url(self, query, num, start):
         """
         Google Search
         """
@@ -75,4 +76,4 @@ class GoogleSearch(Search):
 
 if __name__ == '__main__':
     google = GoogleSearch()
-    google.search('inurl:gov.cn', 10,0)
+    google.search('inurl:.gov.cn', 10,0)
